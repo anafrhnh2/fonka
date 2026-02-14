@@ -108,7 +108,7 @@
         </a>
 
         @foreach($children as $child)
-            <a href="#" class="profile-card group">
+            <a href="{{ route('child.select', $child->id) }}" class="profile-card group">
                 
                 <div class="avatar-circle overflow-hidden shadow-lg border-4 border-green-200 group-hover:scale-110 transition-transform bg-green-100">
                     @if($child->avatar && $child->avatar !== 'default_avatar.png')
