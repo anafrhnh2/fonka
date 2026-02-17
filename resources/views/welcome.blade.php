@@ -1,151 +1,184 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Fonka - Fun Learning</title>
+@extends('layouts.app')
 
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+@section('content')
 
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        fontFamily: {
-                            sans: ['Fredoka', 'sans-serif'],
-                        },
-                        colors: {
-                            'fun-blue': '#E0F2FE',
-                            'fun-yellow': '#FEF08A',
-                            'fun-pink': '#FCE7F3',
-                            'brand-blue': '#0EA5E9',
-                            'brand-dark': '#0C4A6E',
-                        },
-                        boxShadow: {
-                            'pop': '0px 6px 0px 0px rgba(0,0,0,0.1)',
-                            'pop-hover': '0px 3px 0px 0px rgba(0,0,0,0.1)',
-                        }
-                    }
-                }
-            }
-        </script>
+    <header class="w-full bg-gradient-to-b from-[#E0F2FE] to-white pt-20 pb-24 text-center px-6 relative overflow-hidden">
+        
+        <div class="absolute top-10 left-10 w-32 h-32 bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
+        <div class="absolute top-10 right-10 w-32 h-32 bg-pink-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse" style="animation-delay: 2s"></div>
 
-        <style>
-            /* Custom Background Pattern */
-            body {
-                background-color: #E0F2FE;
-                background-image: radial-gradient(#bae6fd 2px, transparent 2px);
-                background-size: 32px 32px;
-            }
-            .blob {
-                position: absolute;
-                filter: blur(40px);
-                z-index: -1;
-                opacity: 0.6;
-            }
-        </style>
-    </head>
-    <body class="min-h-screen flex flex-col font-sans text-slate-700 relative overflow-x-hidden">
+        <div class="max-w-4xl mx-auto relative z-10">
+           
 
-        <div class="blob bg-yellow-200 w-96 h-96 rounded-full top-0 -left-20 animate-pulse"></div>
-        <div class="blob bg-pink-200 w-80 h-80 rounded-full bottom-0 -right-20 animate-pulse" style="animation-delay: 1s;"></div>
-
-        <nav class="w-full max-w-6xl mx-auto p-6 flex justify-between items-center z-10">
-            <div class="flex items-center gap-3 bg-white px-5 py-2 rounded-full shadow-sm border-2 border-white">
-                <div class="bg-brand-blue text-white w-10 h-10 flex items-center justify-center rounded-full text-xl font-bold">
-                    F
-                </div>
-                <span class="text-2xl font-bold text-brand-dark tracking-wide">Fonka</span>
-            </div>
-
-            @if (Route::has('login'))
-                <div class="flex gap-4">
-    @auth
-        <a href="{{ url('/dashboard') }}" class="bg-white ...">
-            {{ optional(auth()->user())->name }}
-        </a>
-    @else
-        <a href="{{ route('login') }}" class="hidden md:inline-block ...">Log in</a>
-
-        <a href="{{ route('onboarding.child') }}" class="bg-yellow-400 ...">
-            Join for Free!
-        </a>
-    @endauth
-</div>
-
-            @endif
-        </nav>
-
-        <main class="flex-grow flex flex-col items-center justify-center px-4 text-center z-10 mt-4 mb-12">
-            
-            <div class="max-w-3xl mx-auto bg-white/60 backdrop-blur-sm p-8 rounded-[3rem] border-4 border-white shadow-xl mb-12">
-                <span class="inline-block py-1 px-3 rounded-full bg-green-100 text-green-700 text-sm font-bold mb-4 tracking-wide">
-                    ✨ Specifically designed for Dyslexic Learners
+            <h1 class="font-fredoka text-5xl md:text-7xl font-bold text-slate-800 mb-6 leading-tight">
+                Reading is hard. <br>
+                <span class="text-brand-blue relative">
+                    We make it fun.
+                    <svg class="absolute w-full h-4 -bottom-2 left-0 text-yellow-400" viewBox="0 0 100 10" preserveAspectRatio="none">
+                        <path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="8" fill="none" />
+                    </svg>
                 </span>
-                <h1 class="text-5xl md:text-7xl font-bold text-brand-dark mb-6 leading-tight">
-                    Let's Learn to Read <br/> 
-                    <span class="text-brand-blue">The Fun Way!</span>
-                </h1>
-                <p class="text-xl text-slate-600 mb-8 leading-relaxed max-w-2xl mx-auto font-medium">
-                    Fonka helps you play with letters, sounds, and words. <br class="hidden md:block">
-                    No stress, just fun games and big stars! 🌟
-                </p>
+            </h1>
 
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="w-full sm:w-auto px-8 py-4 bg-brand-blue text-white text-2xl font-bold rounded-2xl border-b-[6px] border-sky-700 hover:border-sky-600 hover:translate-y-1 active:border-0 transition-all shadow-xl flex items-center justify-center gap-2">
-                            <span>🚀</span> Start Adventure
-                        </a>
-                    @endif
-                    <a href="#about" class="w-full sm:w-auto px-8 py-4 bg-white text-brand-blue text-xl font-bold rounded-2xl border-b-[6px] border-slate-200 hover:border-slate-300 hover:translate-y-1 active:border-0 transition-all shadow-lg">
-                        Learn More
-                    </a>
-                </div>
+            <p class="font-lexend text-xl md:text-2xl text-slate-500 max-w-2xl mx-auto mb-10 leading-relaxed">
+                A science-based learning game designed specifically for <strong class="text-slate-700">dyslexic minds</strong>. Master phonics through sound, sight, and play.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="{{ route('register') }}" class="w-full sm:w-auto px-8 py-4 bg-brand-orange text-white text-xl font-bold rounded-2xl shadow-[0_4px_0_rgb(194,65,12)] hover:shadow-[0_2px_0_rgb(194,65,12)] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2">
+                    <span>🚀</span> Start Learning Free
+                </a>
+                <a href="#how-it-works" class="w-full sm:w-auto px-8 py-4 bg-white text-slate-600 text-xl font-bold rounded-2xl border-2 border-slate-200 hover:border-brand-blue hover:text-brand-blue transition-all flex items-center justify-center gap-2">
+                    <span>▶</span> See How It Works
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-20 bg-slate-50 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-fredoka text-4xl font-bold text-slate-800 mb-4">Why Fonka?</h2>
+                <p class="font-lexend text-lg text-slate-500 max-w-2xl mx-auto">Traditional schools rely on memorization. We rely on <span class="text-brand-blue font-bold">Multisensory Learning</span>—connecting sound, sight, and touch.</p>
             </div>
 
-            <div id="about" class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl w-full">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 
-                <div class="bg-white p-6 rounded-[2rem] border-4 border-transparent hover:border-green-200 hover:scale-105 transition-all duration-300 shadow-md flex flex-col items-center text-center group">
-                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center text-4xl mb-4 group-hover:rotate-12 transition-transform">
-                        📖
+                <div class="bg-white p-8 rounded-[2rem] border-b-8 border-blue-100 hover:border-blue-300 transition-colors group">
+                    <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                        👁️
                     </div>
-                    <h3 class="text-2xl font-bold text-slate-800 mb-2">Easy Reading</h3>
-                    <p class="text-slate-500 font-medium leading-relaxed">
-                        We use special letters and colors to make reading super clear and easy for your eyes.
+                    <h3 class="font-fredoka text-2xl font-bold text-slate-700 mb-3">Dyslexia-Friendly UI</h3>
+                    <p class="font-lexend text-slate-500 leading-relaxed">
+                        We use OpenDyslexic and Fredoka fonts, high contrast colors, and zero visual clutter to reduce reading anxiety.
                     </p>
                 </div>
 
-                <div class="bg-white p-6 rounded-[2rem] border-4 border-transparent hover:border-purple-200 hover:scale-105 transition-all duration-300 shadow-md flex flex-col items-center text-center group">
-                    <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center text-4xl mb-4 group-hover:-rotate-12 transition-transform">
-                        🎮
+                <div class="bg-white p-8 rounded-[2rem] border-b-8 border-green-100 hover:border-green-300 transition-colors group">
+                    <div class="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                        👂
                     </div>
-                    <h3 class="text-2xl font-bold text-slate-800 mb-2">Cool Games</h3>
-                    <p class="text-slate-500 font-medium leading-relaxed">
-                        Don't just study! Play fun mini-games to unlock new levels and characters.
+                    <h3 class="font-fredoka text-2xl font-bold text-slate-700 mb-3">Phonics & Sound</h3>
+                    <p class="font-lexend text-slate-500 leading-relaxed">
+                        Children learn to connect sounds to letters using their own voice. Our AI listens and gives gentle feedback.
                     </p>
                 </div>
 
-                <div class="bg-white p-6 rounded-[2rem] border-4 border-transparent hover:border-orange-200 hover:scale-105 transition-all duration-300 shadow-md flex flex-col items-center text-center group">
-                    <div class="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center text-4xl mb-4 group-hover:scale-110 transition-transform">
+                <div class="bg-white p-8 rounded-[2rem] border-b-8 border-orange-100 hover:border-orange-300 transition-colors group">
+                    <div class="w-14 h-14 bg-orange-100 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
                         🏆
                     </div>
-                    <h3 class="text-2xl font-bold text-slate-800 mb-2">Win Badges</h3>
-                    <p class="text-slate-500 font-medium leading-relaxed">
-                        Earn gold stars and awesome badges every time you learn a new word!
+                    <h3 class="font-fredoka text-2xl font-bold text-slate-700 mb-3">Stress-Free Gaming</h3>
+                    <p class="font-lexend text-slate-500 leading-relaxed">
+                        No timers. No "game overs". Just rewards, badges, and progress. Learning feels like playing.
                     </p>
                 </div>
 
             </div>
+        </div>
+    </section>
 
-        </main>
+    <section class="py-20 bg-white px-6 overflow-hidden">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-20">
+            
+            <div class="w-full md:w-1/2 relative">
+                <div class="absolute inset-0 bg-brand-blue opacity-10 rounded-full filter blur-3xl transform scale-90"></div>
+                
+                <div class="relative bg-gradient-to-tr from-blue-50 to-white border-4 border-slate-100 rounded-[3rem] p-8 shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <div class="text-sm text-slate-400 font-bold uppercase tracking-wider">Today's Progress</div>
+                            <div class="text-3xl font-fredoka font-bold text-slate-800">15 Words Learned</div>
+                        </div>
+                        <div class="bg-green-100 text-green-700 font-bold px-3 py-1 rounded-full text-sm">Excellent!</div>
+                    </div>
+                    <div class="flex items-end gap-3 h-32 mb-4">
+                        <div class="w-1/5 bg-blue-200 rounded-t-lg h-[40%]"></div>
+                        <div class="w-1/5 bg-blue-300 rounded-t-lg h-[60%]"></div>
+                        <div class="w-1/5 bg-brand-blue rounded-t-lg h-[80%] relative group">
+                             <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition">Today</div>
+                        </div>
+                        <div class="w-1/5 bg-slate-100 rounded-t-lg h-[20%]"></div>
+                        <div class="w-1/5 bg-slate-100 rounded-t-lg h-[20%]"></div>
+                    </div>
+                    <p class="text-center text-slate-400 text-sm font-bold">Weekly Activity</p>
+                </div>
+            </div>
 
-        <footer class="text-center py-8 text-slate-500 font-medium text-sm z-10">
-            <p>Made with ❤️ for smart kids everywhere.</p>
-            <p class="opacity-60">&copy; {{ date('Y') }} Fonka Dyslexia System</p>
-        </footer>
+            <div class="w-full md:w-1/2 text-left">
+                <span class="inline-block py-1 px-3 rounded-full bg-purple-100 text-purple-600 text-sm font-bold mb-4">For Parents</span>
+                <h2 class="font-fredoka text-4xl md:text-5xl font-bold text-slate-800 mb-6">Track progress, <br>not mistakes.</h2>
+                <p class="font-lexend text-lg text-slate-500 mb-8 leading-relaxed">
+                    We know it can be frustrating when your child struggles. Fonka gives you a simple, clear dashboard to see exactly what they are learning.
+                </p>
+                
+                <ul class="space-y-4 font-lexend text-slate-600">
+                    <li class="flex items-start gap-3">
+                        <div class="bg-green-100 p-1 rounded-full text-green-600 mt-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span>See which sounds they mastered.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="bg-green-100 p-1 rounded-full text-green-600 mt-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span>Identify tricky words needing practice.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="bg-green-100 p-1 rounded-full text-green-600 mt-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span>Get email summaries (no login needed).</span>
+                    </li>
+                </ul>
+            </div>
 
-    </body>
-</html>
+        </div>
+    </section>
+
+    <section class="py-20 px-4">
+        <div class="w-full bg-[#0F172A] text-white mx-auto max-w-6xl rounded-[2.5rem] shadow-2xl overflow-hidden relative">
+            
+            <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#334155 1px, transparent 1px); background-size: 20px 20px;"></div>
+
+            <div class="flex flex-col md:flex-row items-center relative z-10">
+                
+                <div class="p-10 md:p-16 md:w-1/2 text-left">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-8 h-8 rounded-full bg-brand-blue flex items-center justify-center font-bold text-xs">F</div>
+                        <span class="font-bold tracking-widest text-xs text-blue-200 uppercase">Our Mission</span>
+                    </div>
+                    <h2 class="font-fredoka text-3xl md:text-4xl font-bold mb-6 leading-tight">
+                        Dyslexic Thinking is a Superpower.
+                    </h2>
+                    <p class="font-lexend text-slate-300 mb-8 leading-relaxed">
+                        We aren't trying to "fix" your child. We are giving them the tools to decode the world so their brilliance can shine.
+                    </p>
+                    <button class="bg-white text-slate-900 font-bold px-6 py-3 rounded-xl hover:bg-blue-50 transition flex items-center gap-2">
+                        <span>▶</span> Watch Our Story
+                    </button>
+                </div>
+
+                <div class="w-full md:w-1/2 h-80 md:h-[500px] bg-slate-800 relative group cursor-pointer overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=2022&auto=format&fit=crop" 
+                         alt="Happy child learning" 
+                         class="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition duration-500">
+                    
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-20 h-20 bg-brand-blue rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition duration-300">
+                            <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path></svg>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 text-center px-6">
+        <h2 class="font-fredoka text-4xl md:text-5xl font-bold text-slate-800 mb-6">Ready to start the adventure?</h2>
+        <p class="font-lexend text-xl text-slate-500 mb-10">No credit card required. Cancel anytime.</p>
+        
+        <div class="inline-block p-2 bg-white rounded-3xl shadow-xl border border-slate-100">
+            <a href="{{ route('register') }}" class="block w-full sm:w-auto px-12 py-5 bg-brand-orange text-white text-2xl font-bold rounded-2xl shadow-lg hover:bg-orange-600 transition hover:scale-105">
+                Join Fonka for Free
+            </a>
+        </div>
+    </section>
+
+@endsection
